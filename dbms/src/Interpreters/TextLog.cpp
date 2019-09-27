@@ -10,7 +10,7 @@
 namespace DB
 {
 
-template <> struct NearestFieldTypeImpl<Message::Priority> { using Type = UInt64; };
+template <> struct FieldStorageTypeImpl<Message::Priority> { using Type = UInt64; };
 
 Block TextLogElement::createBlock()
 {

@@ -21,7 +21,7 @@
 namespace DB
 {
 
-template <> struct NearestFieldTypeImpl<QueryLogElement::Type> { using Type = UInt64; };
+template <> struct FieldStorageTypeImpl<QueryLogElement::Type> { using Type = UInt64; };
 
 Block QueryLogElement::createBlock()
 {

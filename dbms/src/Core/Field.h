@@ -26,6 +26,12 @@ namespace ErrorCodes
     extern const int ILLEGAL_TYPE_OF_ARGUMENT;
 }
 
+template <typename T>
+struct FieldStorageTypeImpl;
+
+template <typename T>
+using FieldStorageType = typename FieldStorageTypeImpl<T>::Type;
+
 class Field;
 using Array = std::vector<Field>;
 using TupleBackend = std::vector<Field>;
@@ -623,56 +629,52 @@ template <> struct TypeName<Tuple> { static std::string get() { return "Tuple"; 
 template <> struct TypeName<AggregateFunctionStateData> { static std::string get() { return "AggregateFunctionState"; } };
 
 
-template <typename T> struct NearestFieldTypeImpl;
 
 /// char may be signed or unsigned, and behave identically to signed char or unsigned char,
 ///  but they are always three different types.
 /// signedness of char is different in Linux on x86 and Linux on ARM.
-template <> struct NearestFieldTypeImpl<char> { using Type = std::conditional_t<std::is_signed_v<char>, Int64, UInt64>; };
-template <> struct NearestFieldTypeImpl<signed char> { using Type = Int64; };
-template <> struct NearestFieldTypeImpl<unsigned char> { using Type = UInt64; };
+template <> struct FieldStorageTypeImpl<char> { using Type = std::conditional_t<std::is_signed_v<char>, Int64, UInt64>; };
+template <> struct FieldStorageTypeImpl<signed char> { using Type = Int64; };
+template <> struct FieldStorageTypeImpl<unsigned char> { using Type = UInt64; };
 
-template <> struct NearestFieldTypeImpl<UInt16> { using Type = UInt64; };
-template <> struct NearestFieldTypeImpl<UInt32> { using Type = UInt64; };
+template <> struct FieldStorageTypeImpl<UInt16> { using Type = UInt64; };
+template <> struct FieldStorageTypeImpl<UInt32> { using Type = UInt64; };
 
-template <> struct NearestFieldTypeImpl<DayNum> { using Type = UInt64; };
-template <> struct NearestFieldTypeImpl<UInt128> { using Type = UInt128; };
-template <> struct NearestFieldTypeImpl<UUID> { using Type = UInt128; };
-template <> struct NearestFieldTypeImpl<Int16> { using Type = Int64; };
-template <> struct NearestFieldTypeImpl<Int32> { using Type = Int64; };
+template <> struct FieldStorageTypeImpl<DayNum> { using Type = UInt64; };
+template <> struct FieldStorageTypeImpl<UInt128> { using Type = UInt128; };
+template <> struct FieldStorageTypeImpl<UUID> { using Type = UInt128; };
+template <> struct FieldStorageTypeImpl<Int16> { using Type = Int64; };
+template <> struct FieldStorageTypeImpl<Int32> { using Type = Int64; };
 
 /// long and long long are always different types that may behave identically or not.
 /// This is different on Linux and Mac.
-template <> struct NearestFieldTypeImpl<long> { using Type = Int64; };
-template <> struct NearestFieldTypeImpl<long long> { using Type = Int64; };
-template <> struct NearestFieldTypeImpl<unsigned long> { using Type = UInt64; };
-template <> struct NearestFieldTypeImpl<unsigned long long> { using Type = UInt64; };
+template <> struct FieldStorageTypeImpl<long> { using Type = Int64; };
+template <> struct FieldStorageTypeImpl<long long> { using Type = Int64; };
+template <> struct FieldStorageTypeImpl<unsigned long> { using Type = UInt64; };
+template <> struct FieldStorageTypeImpl<unsigned long long> { using Type = UInt64; };
 
-template <> struct NearestFieldTypeImpl<Int128> { using Type = Int128; };
-template <> struct NearestFieldTypeImpl<Decimal32> { using Type = DecimalField<Decimal32>; };
-template <> struct NearestFieldTypeImpl<Decimal64> { using Type = DecimalField<Decimal64>; };
-template <> struct NearestFieldTypeImpl<Decimal128> { using Type = DecimalField<Decimal128>; };
-template <> struct NearestFieldTypeImpl<DecimalField<Decimal32>> { using Type = DecimalField<Decimal32>; };
-template <> struct NearestFieldTypeImpl<DecimalField<Decimal64>> { using Type = DecimalField<Decimal64>; };
-template <> struct NearestFieldTypeImpl<DecimalField<Decimal128>> { using Type = DecimalField<Decimal128>; };
-template <> struct NearestFieldTypeImpl<Float32> { using Type = Float64; };
-template <> struct NearestFieldTypeImpl<Float64> { using Type = Float64; };
-template <> struct NearestFieldTypeImpl<const char *> { using Type = String; };
-template <> struct NearestFieldTypeImpl<String> { using Type = String; };
-template <> struct NearestFieldTypeImpl<Array> { using Type = Array; };
-template <> struct NearestFieldTypeImpl<Tuple> { using Type = Tuple; };
-template <> struct NearestFieldTypeImpl<bool> { using Type = UInt64; };
-template <> struct NearestFieldTypeImpl<Null> { using Type = Null; };
+template <> struct FieldStorageTypeImpl<Int128> { using Type = Int128; };
+template <> struct FieldStorageTypeImpl<Decimal32> { using Type = DecimalField<Decimal32>; };
+template <> struct FieldStorageTypeImpl<Decimal64> { using Type = DecimalField<Decimal64>; };
+template <> struct FieldStorageTypeImpl<Decimal128> { using Type = DecimalField<Decimal128>; };
+template <> struct FieldStorageTypeImpl<DecimalField<Decimal32>> { using Type = DecimalField<Decimal32>; };
+template <> struct FieldStorageTypeImpl<DecimalField<Decimal64>> { using Type = DecimalField<Decimal64>; };
+template <> struct FieldStorageTypeImpl<DecimalField<Decimal128>> { using Type = DecimalField<Decimal128>; };
+template <> struct FieldStorageTypeImpl<Float32> { using Type = Float64; };
+template <> struct FieldStorageTypeImpl<Float64> { using Type = Float64; };
+template <> struct FieldStorageTypeImpl<const char *> { using Type = String; };
+template <> struct FieldStorageTypeImpl<String> { using Type = String; };
+template <> struct FieldStorageTypeImpl<Array> { using Type = Array; };
+template <> struct FieldStorageTypeImpl<Tuple> { using Type = Tuple; };
+template <> struct FieldStorageTypeImpl<bool> { using Type = UInt64; };
+template <> struct FieldStorageTypeImpl<Null> { using Type = Null; };
 
-template <> struct NearestFieldTypeImpl<AggregateFunctionStateData> { using Type = AggregateFunctionStateData; };
-
-template <typename T>
-using NearestFieldType = typename NearestFieldTypeImpl<T>::Type;
+template <> struct FieldStorageTypeImpl<AggregateFunctionStateData> { using Type = AggregateFunctionStateData; };
 
 template <typename T>
-decltype(auto) nearestFieldType(T && x)
+decltype(auto) castToFieldStorageType(T && x)
 {
-    using U = NearestFieldType<std::decay_t<T>>;
+    using U = FieldStorageType<std::decay_t<T>>;
     if constexpr (std::is_same_v<std::decay_t<T>, U>)
         return std::forward<T>(x);
     else
@@ -689,7 +691,7 @@ decltype(auto) nearestFieldType(T && x)
 template <typename T>
 Field::Field(T && rhs, std::enable_if_t<!std::is_same_v<std::decay_t<T>, Field>, void *>)
 {
-    auto && val = nearestFieldType(std::forward<T>(rhs));
+    auto && val = castToFieldStorageType(std::forward<T>(rhs));
     createConcrete(std::forward<decltype(val)>(val));
 }
 
@@ -697,7 +699,7 @@ template <typename T>
 std::enable_if_t<!std::is_same_v<std::decay_t<T>, Field>, Field &>
 Field::operator= (T && rhs)
 {
-    auto && val = nearestFieldType(std::forward<T>(rhs));
+    auto && val = castToFieldStorageType(std::forward<T>(rhs));
     using U = decltype(val);
     if (which != TypeToEnum<std::decay_t<U>>::value)
     {

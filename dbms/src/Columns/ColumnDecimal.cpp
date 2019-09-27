@@ -219,8 +219,8 @@ void ColumnDecimal<T>::getExtremes(Field & min, Field & max) const
 {
     if (data.size() == 0)
     {
-        min = NearestFieldType<T>(0, scale);
-        max = NearestFieldType<T>(0, scale);
+        min = FieldStorageType<T>(0, scale);
+        max = FieldStorageType<T>(0, scale);
         return;
     }
 
@@ -235,8 +235,8 @@ void ColumnDecimal<T>::getExtremes(Field & min, Field & max) const
             cur_max = x;
     }
 
-    min = NearestFieldType<T>(cur_min, scale);
-    max = NearestFieldType<T>(cur_max, scale);
+    min = FieldStorageType<T>(cur_min, scale);
+    max = FieldStorageType<T>(cur_max, scale);
 }
 
 template class ColumnDecimal<Decimal32>;

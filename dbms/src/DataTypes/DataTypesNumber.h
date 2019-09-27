@@ -21,7 +21,7 @@ class DataTypeNumber final : public DataTypeNumberBase<T>
     bool canBePromoted() const override { return true; }
     DataTypePtr promoteNumericType() const override
     {
-        using PromotedType = DataTypeNumber<NearestFieldType<T>>;
+        using PromotedType = DataTypeNumber<FieldStorageType<T>>;
         return std::make_shared<PromotedType>();
     }
 };

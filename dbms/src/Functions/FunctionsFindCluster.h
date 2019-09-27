@@ -180,7 +180,7 @@ protected:
         for (size_t k = 0; k < array.size(); ++k)
         {
             const Field & tmp_field = array[k];
-            NearestFieldType<CentroidsType> value;
+            FieldStorageType<CentroidsType> value;
             if (!tmp_field.tryGet(value))
                 return false;
 

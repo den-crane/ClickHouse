@@ -476,7 +476,7 @@ void ComplexKeyHashedDictionary::calculateBytesAllocated()
 template <typename T>
 void ComplexKeyHashedDictionary::createAttributeImpl(Attribute & attribute, const Field & null_value)
 {
-    attribute.null_values = T(null_value.get<NearestFieldType<T>>());
+    attribute.null_values = T(null_value.get<FieldStorageType<T>>());
     attribute.maps.emplace<ContainerType<T>>();
 }
 

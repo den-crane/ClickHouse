@@ -62,13 +62,13 @@ const ColumnConst * checkAndGetColumnConstStringOrFixedString(const IColumn * co
 template <typename T>
 inline std::enable_if_t<!IsDecimalNumber<T>, Field> toField(const T & x)
 {
-    return Field(NearestFieldType<T>(x));
+    return Field(FieldStorageType<T>(x));
 }
 
 template <typename T>
 inline std::enable_if_t<IsDecimalNumber<T>, Field> toField(const T & x, UInt32 scale)
 {
-    return Field(NearestFieldType<T>(x, scale));
+    return Field(FieldStorageType<T>(x, scale));
 }
 
 

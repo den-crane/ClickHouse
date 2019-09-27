@@ -53,7 +53,7 @@ struct AggregateFunctionSumMapData
 
 template <typename T, typename Derived, typename OverflowPolicy>
 class AggregateFunctionSumMapBase : public IAggregateFunctionDataHelper<
-    AggregateFunctionSumMapData<NearestFieldType<T>>, Derived>
+    AggregateFunctionSumMapData<FieldStorageType<T>>, Derived>
 {
 private:
     using ColVecType = std::conditional_t<IsDecimalNumber<T>, ColumnDecimal<T>, ColumnVector<T>>;
@@ -65,7 +65,7 @@ public:
     AggregateFunctionSumMapBase(
         const DataTypePtr & keys_type_, const DataTypes & values_types_,
         const DataTypes & argument_types_, const Array & params_)
-        : IAggregateFunctionDataHelper<AggregateFunctionSumMapData<NearestFieldType<T>>, Derived>(argument_types_, params_)
+        : IAggregateFunctionDataHelper<AggregateFunctionSumMapData<FieldStorageType<T>>, Derived>(argument_types_, params_)
         , keys_type(keys_type_), values_types(values_types_) {}
 
     String getName() const override { return "sumMap"; }
@@ -303,7 +303,7 @@ public:
         keys_to_keep.reserve(keys_to_keep_.size());
         for (const Field & f : keys_to_keep_)
         {
-            keys_to_keep.emplace(f.safeGet<NearestFieldType<T>>());
+            keys_to_keep.emplace(f.safeGet<FieldStorageType<T>>());
         }
     }
 

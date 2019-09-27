@@ -12,7 +12,7 @@ namespace
 template <typename T>
 struct Avg
 {
-    using FieldType = std::conditional_t<IsDecimalNumber<T>, Decimal128, NearestFieldType<T>>;
+    using FieldType = std::conditional_t<IsDecimalNumber<T>, Decimal128, FieldStorageType<T>>;
     using Function = AggregateFunctionAvg<T, AggregateFunctionAvgData<FieldType>>;
 };
 

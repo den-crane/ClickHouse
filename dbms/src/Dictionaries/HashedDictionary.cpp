@@ -514,7 +514,7 @@ void HashedDictionary::calculateBytesAllocated()
 template <typename T>
 void HashedDictionary::createAttributeImpl(Attribute & attribute, const Field & null_value)
 {
-    attribute.null_values = T(null_value.get<NearestFieldType<T>>());
+    attribute.null_values = T(null_value.get<FieldStorageType<T>>());
     if (!sparse)
         attribute.maps = std::make_unique<CollectionType<T>>();
     else
