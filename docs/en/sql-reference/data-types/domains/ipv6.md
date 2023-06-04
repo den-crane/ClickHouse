@@ -59,4 +59,4 @@ SELECT toTypeName(from), hex(from) FROM hits LIMIT 1;
 
 **See Also**
 
-- [Functions for Working with IPv4 and IPv6 Addresses](../../sql-reference/functions/ip-address-functions.md)
+- [Functions for Working with IPv4 and IPv6 Addresses](../functions/ip-address-functions.md)
