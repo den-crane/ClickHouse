@@ -1,5 +1,5 @@
 ---
-slug: /en/sql-reference/data-types/domains/ipv4
+slug: /en/sql-reference/data-types/ipv4
 sidebar_position: 59
 sidebar_label: IPv4
 ---
@@ -59,4 +59,4 @@ SELECT toTypeName(from), hex(from) FROM hits LIMIT 1;
 
 **See Also**
 
-- [Functions for Working with IPv4 and IPv6 Addresses](../../functions/ip-address-functions.md)
+- [Functions for Working with IPv4 and IPv6 Addresses](../functions/ip-address-functions.md)
