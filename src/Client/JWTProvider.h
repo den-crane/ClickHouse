@@ -34,11 +34,11 @@ public:
     static Poco::Timestamp getJwtExpiry(const std::string & token);
 
 protected:
-    bool initialLogin();
-    bool refreshIdPAccessToken();
+    void deviceCodeLogin();
+    void refreshIdPAccessToken();
 
     static std::unique_ptr<Poco::Net::HTTPSClientSession> createHTTPSession(const Poco::URI & uri);
-    static bool openURLInBrowser(const std::string & url);
+    static void openURLInBrowser(const std::string & url);
 
     // Configuration
     std::string auth_url_str;
