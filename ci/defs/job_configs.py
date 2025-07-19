@@ -325,34 +325,34 @@ class JobConfigs:
             "arm_binary, sequential",
         ],
         runs_on=[
-            RunnerLabels.FUNC_TESTER_AMD,  # amd_asan, distributed plan, parallel, 1/2
-            RunnerLabels.FUNC_TESTER_AMD,  # amd_asan, distributed plan, parallel, 2/2
-            RunnerLabels.FUNC_TESTER_AMD,  # amd_asan, distributed plan, sequential
-            RunnerLabels.FUNC_TESTER_AMD,  # amd_binary, old analyzer, s3 storage, DatabaseReplicated, parallel
-            RunnerLabels.FUNC_TESTER_AMD,  # amd_binary, old analyzer, s3 storage, DatabaseReplicated, sequential
-            RunnerLabels.FUNC_TESTER_AMD,  # amd_binary, ParallelReplicas, s3 storage, parallel
-            RunnerLabels.FUNC_TESTER_AMD,  # amd_binary, ParallelReplicas, s3 storage, sequential
-            RunnerLabels.FUNC_TESTER_AMD,  # amd_debug, AsyncInsert, s3 storage, parallel
-            RunnerLabels.FUNC_TESTER_AMD,  # amd_debug, AsyncInsert, s3 storage, sequential
-            RunnerLabels.FUNC_TESTER_AMD,  # amd_debug, parallel
-            RunnerLabels.FUNC_TESTER_AMD,  # amd_debug, sequential
-            RunnerLabels.FUNC_TESTER_AMD,  # amd_tsan, parallel, 1/2
-            RunnerLabels.FUNC_TESTER_AMD,  # amd_tsan, parallel, 2/2
-            RunnerLabels.FUNC_TESTER_AMD,  # amd_tsan, sequential, 1/2
-            RunnerLabels.FUNC_TESTER_AMD,  # amd_tsan, sequential, 2/2
-            RunnerLabels.FUNC_TESTER_AMD,  # amd_msan, parallel, 1/2
-            RunnerLabels.FUNC_TESTER_AMD,  # amd_msan, sequential, 1/2
-            RunnerLabels.FUNC_TESTER_AMD,  # amd_msan, parallel, 2/2
-            RunnerLabels.FUNC_TESTER_AMD,  # amd_msan, sequential, 2/2
-            RunnerLabels.FUNC_TESTER_AMD,  # amd_ubsan, parallel
-            RunnerLabels.FUNC_TESTER_AMD,  # amd_ubsan, sequential
-            RunnerLabels.FUNC_TESTER_AMD,  # amd_debug, distributed plan, s3 storage, parallel
-            RunnerLabels.FUNC_TESTER_AMD,  # amd_debug, distributed plan, s3 storage, sequential
-            RunnerLabels.FUNC_TESTER_AMD,  # amd_tsan, s3 storage, parallel
-            RunnerLabels.FUNC_TESTER_AMD,  # amd_tsan, s3 storage, 1/2, sequential
-            RunnerLabels.FUNC_TESTER_AMD,  # amd_tsan, s3 storage, 2/2, sequential
-            RunnerLabels.FUNC_TESTER_ARM,  # arm_binary, parallel
-            RunnerLabels.FUNC_TESTER_ARM,  # arm_binary, sequential
+            RunnerLabels.AMD_MEDIUM_CPU,  # amd_asan, distributed plan, parallel, 1/2
+            RunnerLabels.AMD_MEDIUM_CPU,  # amd_asan, distributed plan, parallel, 2/2
+            RunnerLabels.AMD_SMALL,  # amd_asan, distributed plan, sequential
+            RunnerLabels.AMD_MEDIUM_CPU,  # amd_binary, old analyzer, s3 storage, DatabaseReplicated, parallel
+            RunnerLabels.AMD_SMALL,  # amd_binary, old analyzer, s3 storage, DatabaseReplicated, sequential
+            RunnerLabels.AMD_MEDIUM_CPU,  # amd_binary, ParallelReplicas, s3 storage, parallel
+            RunnerLabels.AMD_SMALL,  # amd_binary, ParallelReplicas, s3 storage, sequential
+            RunnerLabels.AMD_MEDIUM_CPU,  # amd_debug, AsyncInsert, s3 storage, parallel
+            RunnerLabels.AMD_SMALL,  # amd_debug, AsyncInsert, s3 storage, sequential
+            RunnerLabels.AMD_MEDIUM_CPU,  # amd_debug, parallel
+            RunnerLabels.AMD_SMALL,  # amd_debug, sequential
+            RunnerLabels.AMD_MEDIUM_CPU,  # amd_tsan, parallel, 1/2
+            RunnerLabels.AMD_MEDIUM_CPU,  # amd_tsan, parallel, 2/2
+            RunnerLabels.AMD_SMALL,  # amd_tsan, sequential, 1/2
+            RunnerLabels.AMD_SMALL,  # amd_tsan, sequential, 2/2
+            RunnerLabels.AMD_MEDIUM_MEM,  # amd_msan, parallel, 1/2
+            RunnerLabels.AMD_SMALL,  # amd_msan, sequential, 1/2
+            RunnerLabels.AMD_MEDIUM_MEM,  # amd_msan, parallel, 2/2
+            RunnerLabels.AMD_SMALL,  # amd_msan, sequential, 2/2
+            RunnerLabels.AMD_MEDIUM_CPU,  # amd_ubsan, parallel
+            RunnerLabels.AMD_SMALL,  # amd_ubsan, sequential
+            RunnerLabels.AMD_MEDIUM_CPU,  # amd_debug, distributed plan, s3 storage, parallel
+            RunnerLabels.AMD_SMALL,  # amd_debug, distributed plan, s3 storage, sequential
+            RunnerLabels.AMD_MEDIUM_CPU,  # amd_tsan, s3 storage, parallel
+            RunnerLabels.AMD_SMALL,  # amd_tsan, s3 storage, 1/2, sequential
+            RunnerLabels.AMD_SMALL,  # amd_tsan, s3 storage, 2/2, sequential
+            RunnerLabels.ARM_MEDIUM_CPU,  # arm_binary, parallel
+            RunnerLabels.ARM_SMALL,  # arm_binary, sequential
         ],
         requires=[
             [
