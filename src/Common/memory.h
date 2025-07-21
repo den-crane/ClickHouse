@@ -163,9 +163,9 @@ inline ALWAYS_INLINE void deleteSized(void * ptr, std::size_t size, TAlign... al
 #endif
 
     if constexpr (sizeof...(TAlign) == 1)
-        __real_sdallocx(ptr, size, MALLOCX_ALIGN(alignToSizeT(align...)));
+        sdallocx(ptr, size, MALLOCX_ALIGN(alignToSizeT(align...)));
     else
-        __real_sdallocx(ptr, size, 0);
+        sdallocx(ptr, size, 0);
 }
 
 #else
