@@ -329,7 +329,7 @@ class JobConfigs:
         runs_on=[
             RunnerLabels.AMD_MEDIUM_CPU,  # amd_asan, distributed plan, parallel, 1/2
             RunnerLabels.AMD_MEDIUM_CPU,  # amd_asan, distributed plan, parallel, 2/2
-            RunnerLabels.AMD_SMALL,  # amd_asan, distributed plan, sequential
+            RunnerLabels.AMD_SMALL_MEM,  # amd_asan, distributed plan, sequential
             RunnerLabels.AMD_MEDIUM_CPU,  # amd_binary, old analyzer, s3 storage, DatabaseReplicated, parallel
             RunnerLabels.AMD_SMALL,  # amd_binary, old analyzer, s3 storage, DatabaseReplicated, sequential
             RunnerLabels.AMD_MEDIUM_CPU,  # amd_binary, ParallelReplicas, s3 storage, parallel
@@ -340,12 +340,12 @@ class JobConfigs:
             RunnerLabels.AMD_SMALL,  # amd_debug, sequential
             RunnerLabels.AMD_MEDIUM_CPU,  # amd_tsan, parallel, 1/2
             RunnerLabels.AMD_MEDIUM_CPU,  # amd_tsan, parallel, 2/2
-            RunnerLabels.AMD_SMALL,  # amd_tsan, sequential, 1/2
+            RunnerLabels.AMD_SMALL_MEM,  # amd_tsan, sequential, 1/2
             RunnerLabels.AMD_SMALL,  # amd_tsan, sequential, 2/2
             RunnerLabels.AMD_MEDIUM_MEM,  # amd_msan, parallel, 1/2
-            RunnerLabels.AMD_SMALL,  # amd_msan, sequential, 1/2
+            RunnerLabels.AMD_SMALL_MEM,  # amd_msan, sequential, 1/2
             RunnerLabels.AMD_MEDIUM_MEM,  # amd_msan, parallel, 2/2
-            RunnerLabels.AMD_SMALL,  # amd_msan, sequential, 2/2
+            RunnerLabels.AMD_SMALL_MEM,  # amd_msan, sequential, 2/2
             RunnerLabels.AMD_MEDIUM_CPU,  # amd_ubsan, parallel
             RunnerLabels.AMD_SMALL,  # amd_ubsan, sequential
             RunnerLabels.AMD_MEDIUM_CPU,  # amd_debug, distributed plan, s3 storage, parallel
