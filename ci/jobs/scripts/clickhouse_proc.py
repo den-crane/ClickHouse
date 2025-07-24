@@ -203,7 +203,6 @@ profiles:
         allow_introspection_functions: 1
 """
         file_path = f"{self.ch_config_dir}/users.d/allow_introspection_functions.yaml"
-        Path(file_path).parent.mkdir(parents=True, exist_ok=True)
         with open(file_path, "w") as file:
             file.write(content)
         return True
@@ -249,6 +248,7 @@ profiles:
     def create_log_export_config(self):
         print("Create log export config")
         config_file = Path(self.ch_config_dir) / "config.d" / "system_logs_export.yaml"
+        config_file.parent.mkdir(parents=True, exist_ok=True)
 
         self.log_export_host = Secret.Config(
             name="clickhouse_ci_logs_host",
